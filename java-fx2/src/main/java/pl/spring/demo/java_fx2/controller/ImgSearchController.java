@@ -8,9 +8,12 @@ import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,6 +47,9 @@ public class ImgSearchController {
 	@FXML
 	private ScrollPane scrollPane;
 
+	@FXML
+	private ListView<String> pictureList;
+
 	private List<File> fileList;
 
 	private int pictureNumber;
@@ -53,13 +59,6 @@ public class ImgSearchController {
 	@FXML
 	private void initialize() {
 		LOG.debug("initialize(): nameField = ");
-
-		initializeResultTable();
-
-		// searchButton.disableProperty().bind(titleField.textProperty().isEmpty());
-	}
-
-	private void initializeResultTable() {
 
 	}
 
@@ -73,10 +72,15 @@ public class ImgSearchController {
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images", "*.*"),
 				new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("GIF", "*.gif"),
 				new FileChooser.ExtensionFilter("BMP", "*.bmp"), new FileChooser.ExtensionFilter("PNG", "*.png"));
-		// File file = fileChooser.showOpenDialog(new Stage());
 		fileList = fileChooser.showOpenMultipleDialog(new Stage());
 
 		if (fileList != null) {
+			ObservableList<String> items = FXCollections.observableArrayList();
+			for (File file : fileList) {
+				items.add(file.getName().toString());
+			}
+			pictureList.setItems(items);
+
 			pictureNumber = 0;
 			lastPictureNumber = fileList.size() - 1;
 			File file = fileList.get(pictureNumber);
@@ -84,10 +88,10 @@ public class ImgSearchController {
 			String imagepath = file.toURI().toURL().toString();
 			System.out.println("file:" + imagepath);
 			Image image = new Image(imagepath);
-			imageView.fitWidthProperty().bind(scrollPane.widthProperty());
-			imageView.fitHeightProperty().bind(scrollPane.heightProperty());
 			imageView.setImage(image);
+
 		}
+
 	}
 
 	@FXML
@@ -103,8 +107,6 @@ public class ImgSearchController {
 		String imagepath = file.toURI().toURL().toString();
 		System.out.println("file:" + imagepath);
 		Image image = new Image(imagepath);
-		imageView.fitWidthProperty().bind(scrollPane.widthProperty());
-		imageView.fitHeightProperty().bind(scrollPane.heightProperty());
 		imageView.setImage(image);
 	}
 
@@ -120,8 +122,6 @@ public class ImgSearchController {
 		String imagepath = file.toURI().toURL().toString();
 		System.out.println("file:" + imagepath);
 		Image image = new Image(imagepath);
-		imageView.fitWidthProperty().bind(scrollPane.widthProperty());
-		imageView.fitHeightProperty().bind(scrollPane.heightProperty());
 		imageView.setImage(image);
 	}
 
@@ -131,19 +131,14 @@ public class ImgSearchController {
 			String imagepath = file.toURI().toURL().toString();
 			System.out.println("file:" + imagepath);
 			Image image = new Image(imagepath);
-			imageView.fitWidthProperty().bind(scrollPane.widthProperty());
-			imageView.fitHeightProperty().bind(scrollPane.heightProperty());
 			imageView.setImage(image);
-			try{
+			try {
 
-			    Thread.sleep(1000);
-			}catch(Exception e)
-			{
-			   System.out.println("Exception caught");
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				System.out.println("Exception caught");
 			}
 		}
-
-
 
 	}
 
