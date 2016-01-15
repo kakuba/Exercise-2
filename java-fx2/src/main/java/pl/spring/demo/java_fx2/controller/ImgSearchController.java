@@ -75,23 +75,30 @@ public class ImgSearchController {
 		fileList = fileChooser.showOpenMultipleDialog(new Stage());
 
 		if (fileList != null) {
-			ObservableList<String> items = FXCollections.observableArrayList();
-			for (File file : fileList) {
-				items.add(file.getName().toString());
-			}
-			pictureList.setItems(items);
-
-			pictureNumber = 0;
-			lastPictureNumber = fileList.size() - 1;
-			File file = fileList.get(pictureNumber);
-
-			String imagepath = file.toURI().toURL().toString();
-			System.out.println("file:" + imagepath);
-			Image image = new Image(imagepath);
-			imageView.setImage(image);
-
+			setFirstImage();
 		}
 
+	}
+
+	private void setItemsForListView() {
+		ObservableList<String> items = FXCollections.observableArrayList();
+		for (File file : fileList) {
+			items.add(file.getName().toString());
+		}
+		pictureList.setItems(items);
+	}
+
+	private void setFirstImage() throws MalformedURLException {
+		setItemsForListView();
+
+		pictureNumber = 0;
+		lastPictureNumber = fileList.size() - 1;
+		File file = fileList.get(pictureNumber);
+
+		String imagepath = file.toURI().toURL().toString();
+		System.out.println("file:" + imagepath);
+		Image image = new Image(imagepath);
+		imageView.setImage(image);
 	}
 
 	@FXML
