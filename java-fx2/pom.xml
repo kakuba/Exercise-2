@@ -17,6 +17,7 @@
   </properties>
 
   <dependencies>
+  <!--  REV: zaleznosc nie jest uzywana w projekcie -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

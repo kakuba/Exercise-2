@@ -72,6 +72,9 @@ public class ImgSearchController {
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images", "*.*"),
 				new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("GIF", "*.gif"),
 				new FileChooser.ExtensionFilter("BMP", "*.bmp"), new FileChooser.ExtensionFilter("PNG", "*.png"));
+		/*
+		 * REV: fileChooser powinien byc oknem modalnym, new Stage() nie jest rozwiazaniem
+		 */
 		fileList = fileChooser.showOpenMultipleDialog(new Stage());
 
 		if (fileList != null) {
@@ -96,6 +99,9 @@ public class ImgSearchController {
 		File file = fileList.get(pictureNumber);
 
 		String imagepath = file.toURI().toURL().toString();
+		/*
+		 * REV: zawsze uzywaj loggera
+		 */
 		System.out.println("file:" + imagepath);
 		Image image = new Image(imagepath);
 		imageView.setImage(image);
@@ -112,6 +118,9 @@ public class ImgSearchController {
 		File file = fileList.get(pictureNumber);
 
 		String imagepath = file.toURI().toURL().toString();
+		/*
+		 * REV: zawsze uzywaj loggera
+		 */
 		System.out.println("file:" + imagepath);
 		Image image = new Image(imagepath);
 		imageView.setImage(image);
@@ -127,6 +136,9 @@ public class ImgSearchController {
 		File file = fileList.get(pictureNumber);
 
 		String imagepath = file.toURI().toURL().toString();
+		/*
+		 * REV: zawsze uzywaj loggera
+		 */
 		System.out.println("file:" + imagepath);
 		Image image = new Image(imagepath);
 		imageView.setImage(image);
@@ -136,13 +148,21 @@ public class ImgSearchController {
 	private void startButtonAction(ActionEvent event) throws MalformedURLException {
 		for (File file : fileList) {
 			String imagepath = file.toURI().toURL().toString();
+			/*
+			 * REV: zawsze uzywaj loggera
+			 */
 			System.out.println("file:" + imagepath);
 			Image image = new Image(imagepath);
 			imageView.setImage(image);
 			try {
-
+				/*
+				 * REV: blokujesz watek JavaFX, a wiec cala aplikacje!
+				 */
 				Thread.sleep(1000);
 			} catch (Exception e) {
+				/*
+				 * REV: zawsze uzywaj loggera
+				 */
 				System.out.println("Exception caught");
 			}
 		}

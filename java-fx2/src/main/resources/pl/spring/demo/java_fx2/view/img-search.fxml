@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.51" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.spring.demo.java_fx2.controller.ImgSearchController">
+  <!-- REV: ten GridPane jest niepotrzebny -->
   <GridPane alignment="CENTER" hgap="10.0" layoutX="14.0" layoutY="60.0" vgap="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
       <children>
         <Label alignment="CENTER" minWidth="-Infinity" styleClass="formTitle" text="%label.formTitle" />
@@ -30,6 +31,7 @@
        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" />
      </rowConstraints>
       <children>
+      <!-- REV: ten GridPane jest niepotrzebny -->
         <GridPane alignment="CENTER" hgap="10.0" prefHeight="30.0" prefWidth="282.0" vgap="10.0">
           <columnConstraints>
             <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
@@ -63,6 +65,7 @@
          </GridPane>
       </children>
    </GridPane>
+   <!-- REV: ten ScrollPane nie jest potrzebny, ListView ma swoj scroll bar -->
    <ScrollPane fitToHeight="true" layoutX="540.0" maxWidth="86.0" minWidth="86.0" prefWidth="86.0" AnchorPane.bottomAnchor="44.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="90.0">
       <content>
          <ListView fx:id="pictureList" prefHeight="200.0" prefWidth="200.0" />
